@@ -1,6 +1,8 @@
 import { loadEnv } from 'vite'
 import type { Environment, EnvVariables, ParsedPorts } from '../types'
 
+export { createDefines } from './defines'
+
 export function loadEnvironment(mode: string): EnvVariables {
   return loadEnv(mode, process.cwd(), '') as EnvVariables
 }

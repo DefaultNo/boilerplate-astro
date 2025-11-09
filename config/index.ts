@@ -1,4 +1,4 @@
-import type { AstroUserConfig } from "astro"
+import type { AstroUserConfig } from 'astro'
 
 import {
   parsePorts,
@@ -55,7 +55,7 @@ export function createAstroConfig(mode: string): AstroUserConfig {
 
     markdown: createMarkdownConfig(),
 
-    vite: createViteConfig(),
+    vite: createViteConfig(environment),
   }
 }
 

@@ -1,9 +1,4 @@
 export function createManualChunks(id: string): string | undefined {
-  /* react */
-  if (/\bnode_modules\/(react)\b/.test(id)) {
-    return 'react-vendor'
-  }
-
   /* astro specific */
   if (/\bnode_modules\/@astrojs\b/.test(id)) {
     return 'astro-vendor'

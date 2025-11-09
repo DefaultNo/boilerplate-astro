@@ -4,8 +4,14 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "dev:staging": "cross-env NODE_ENV=staging astro dev",
+    "dev:prod": "cross-env NODE_ENV=production astro dev",
     "build": "astro build",
+    "build:dev": "cross-env NODE_ENV=development astro build",
+    "build:staging": "cross-env NODE_ENV=staging astro build",
     "preview": "astro preview",
+    "preview:dev": "cross-env NODE_ENV=development astro preview",
+    "preview:staging": "cross-env NODE_ENV=staging astro preview",
     "astro": "astro"
   },
   "dependencies": {
@@ -16,5 +22,8 @@
     "astro": "^5.15.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
   }
 }

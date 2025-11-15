@@ -1,0 +1,42 @@
+---
+import type { Locale } from '@/shared/config/i18n'
+
+interface Props {
+  locale: Locale
+  title?: string
+  description?: string
+}
+
+const { locale, title = 'Astro Boilerplate', description } = Astro.props
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    {description && <meta name="description" content={description} />}
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: system-ui, sans-serif;
+  }
+
+  body {
+    padding: 2rem;
+  }
+</style>

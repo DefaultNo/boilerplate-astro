@@ -1,10 +1,9 @@
 import type { AstroUserConfig } from "astro"
 
-import type { Environment, EnvVariables } from '../types'
+import type { Environment } from '../types'
 
 export function createServerConfig(
   environment: Environment,
-  env: EnvVariables,
   port: number,
   allowedHosts: string[]
 ): AstroUserConfig['server'] {

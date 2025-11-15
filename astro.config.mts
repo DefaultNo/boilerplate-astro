@@ -1,6 +1,8 @@
+import { loadEnv } from 'vite'
 import { defineConfig } from 'astro/config'
+
 import { createAstroConfig } from './config'
 
-const mode = process.env.NODE_ENV || 'development'
+const env = loadEnv(process.env['MODE'] || 'development', process.cwd(), '')
 
-export default defineConfig(createAstroConfig(mode))
+export default defineConfig(createAstroConfig(env))

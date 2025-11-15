@@ -3,15 +3,15 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "dev:staging": "cross-env NODE_ENV=staging astro dev",
-    "dev:prod": "cross-env NODE_ENV=production astro dev",
-    "build": "astro build",
-    "build:dev": "cross-env NODE_ENV=development astro build",
-    "build:staging": "cross-env NODE_ENV=staging astro build",
-    "preview": "astro preview",
-    "preview:dev": "cross-env NODE_ENV=development astro preview",
-    "preview:staging": "cross-env NODE_ENV=staging astro preview",
+    "dev": "astro dev --mode development",
+    "dev:staging": "astro dev --mode staging",
+    "dev:prod": "astro dev --mode production",
+    "build": "astro build --mode production",
+    "build:dev": "astro build --mode development",
+    "build:staging": "astro build --mode staging",
+    "preview": "astro preview --mode production",
+    "preview:dev": "astro preview --mode development",
+    "preview:staging": "astro preview --mode staging",
     "astro": "astro"
   },
   "dependencies": {
@@ -24,6 +24,8 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "cross-env": "^10.1.0"
+    "@eslint/js": "^9.39.1",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.1"
   }
 }

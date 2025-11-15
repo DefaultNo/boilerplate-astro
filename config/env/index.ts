@@ -1,13 +1,27 @@
-import { loadEnv } from 'vite'
-import type { Environment, EnvVariables, ParsedPorts } from '../types'
+import type { Environment, ParsedPorts } from '../types'
 
 export { createDefines } from './defines'
+export { createEnvConfig } from './schema'
 
-export function loadEnvironment(mode: string): EnvVariables {
-  return loadEnv(mode, process.cwd(), '') as EnvVariables
+function getEnv(envVars?: Record<string, string>) {
+  const source = envVars || process.env
+
+  return {
+    MODE: (source['MODE'] || 'development') as Environment['mode'],
+    PORT: parseInt(source['PORT'] || '3000', 10),
+    PREVIEW_PORT: parseInt(source['PREVIEW_PORT'] || '4173', 10),
+    BASE_URL: source['BASE_URL'] || '/',
+    ENABLE_DEVTOOLS: source['ENABLE_DEVTOOLS'] === 'true',
+    ALLOWED_HOSTS: source['ALLOWED_HOSTS'] || '',
+    COMPRESS_HTML: source['COMPRESS_HTML'] === 'true',
+    ALLOWED_DOMAINS: source['ALLOWED_DOMAINS'] || '',
+  }
 }
 
-export function createEnvironment(mode: string): Environment {
+export function createEnvironment(envVars?: Record<string, string>): Environment {
+  const env = getEnv(envVars)
+  const mode = env.MODE
+
   return {
     mode,
     isStaging: mode === 'staging',
@@ -16,39 +30,48 @@ export function createEnvironment(mode: string): Environment {
   }
 }
 
-export function parsePorts(env: EnvVariables): ParsedPorts {
-  const port = parseInt(env.ASTRO_PORT) || 3000
-  const previewPort = parseInt(env.ASTRO_PREVIEW_PORT as string) || 4173
+export function parsePorts(envVars?: Record<string, string>): ParsedPorts {
+  const env = getEnv(envVars)
 
   return {
-    port,
-    previewPort,
+    port: env.PORT,
+    previewPort: env.PREVIEW_PORT,
   }
 }
 
-export function parseAllowedDomains(env: EnvVariables): Array<{ hostname: string }> {
-  return env.ASTRO_ALLOWED_DOMAINS
-    ? env.ASTRO_ALLOWED_DOMAINS.split(',').map(domain => ({
-        hostname: domain.trim()
-      }))
+export function parseAllowedDomains(envVars?: Record<string, string>): Array<{ hostname: string }> {
+  const env = getEnv(envVars)
+
+  return env.ALLOWED_DOMAINS
+    ? env.ALLOWED_DOMAINS.split(',')
+        .map((domain: string) => domain.trim())
+        .filter((domain: string) => domain.length > 0)
+        .map((domain: string) => ({ hostname: domain }))
     : []
 }
 
-export function parseAllowedHosts(env: EnvVariables): string[] {
-  return env.ASTRO_ALLOWED_HOSTS
-    ? env.ASTRO_ALLOWED_HOSTS.split(',').map(host => host.trim())
+export function parseAllowedHosts(envVars?: Record<string, string>): string[] {
+  const env = getEnv(envVars)
+
+  return env.ALLOWED_HOSTS
+    ? env.ALLOWED_HOSTS.split(',')
+        .map((host: string) => host.trim())
+        .filter((host: string) => host.length > 0)
     : []
 }
 
-export function getBaseUrl(env: EnvVariables): string {
-  return env.ASTRO_BASE_URL || '/'
+export function getBaseUrl(envVars?: Record<string, string>): string {
+  const env = getEnv(envVars)
+  return env.BASE_URL
 }
 
-export function shouldCompressHTML(env: EnvVariables): boolean {
-  return env.ASTRO_COMPRESS_HTML === 'true'
+export function shouldCompressHTML(envVars?: Record<string, string>): boolean {
+  const env = getEnv(envVars)
+  return env.COMPRESS_HTML
 }
 
-export function shouldEnableDevtools(env: EnvVariables): boolean {
-  return env.ASTRO_DEVTOOLS === 'true'
+export function shouldEnableDevtools(envVars?: Record<string, string>): boolean {
+  const env = getEnv(envVars)
+  return env.ENABLE_DEVTOOLS
 }
 

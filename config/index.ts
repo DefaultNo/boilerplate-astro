@@ -3,7 +3,7 @@ import type { AstroUserConfig } from 'astro'
 import {
   parsePorts,
   getBaseUrl,
-  loadEnvironment,
+  createEnvConfig,
   createEnvironment,
   parseAllowedHosts,
   shouldCompressHTML,
@@ -21,9 +21,8 @@ import { createSecurityConfig } from './security'
 import { createIntegrations } from './integrations'
 import { createDevToolbarConfig } from './devToolbar'
 
-export function createAstroConfig(mode: string): AstroUserConfig {
-  const env = loadEnvironment(mode)
-  const environment = createEnvironment(mode)
+export function createAstroConfig(env?: Record<string, string>): AstroUserConfig {
+  const environment = createEnvironment(env)
   const { port } = parsePorts(env)
 
   const baseUrl = getBaseUrl(env)
@@ -41,7 +40,7 @@ export function createAstroConfig(mode: string): AstroUserConfig {
     compressHTML,
     trailingSlash: 'never',
 
-    server: createServerConfig(environment, env, port, allowedHosts),
+    server: createServerConfig(environment, port, allowedHosts),
 
     security: createSecurityConfig(allowedDomains),
 
@@ -56,6 +55,8 @@ export function createAstroConfig(mode: string): AstroUserConfig {
     markdown: createMarkdownConfig(),
 
     vite: createViteConfig(environment),
+
+    env: createEnvConfig(),
   }
 }
 

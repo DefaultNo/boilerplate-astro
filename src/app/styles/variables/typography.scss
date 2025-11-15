@@ -1,0 +1,30 @@
+@use '../mixins/mixins' as mixins;
+
+:root {
+  --font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* font sizes */
+  @include mixins.setRem(--font-size-heading-large,  32);
+  @include mixins.setRem(--font-size-heading-medium, 27);
+  @include mixins.setRem(--font-size-heading-small,  24);
+  @include mixins.setRem(--font-size-body-large,     21);
+  @include mixins.setRem(--font-size-body-medium,    18);
+  @include mixins.setRem(--font-size-body-small,     16);
+  @include mixins.setRem(--font-size-body-x-small,   14);
+  @include mixins.setRem(--font-size-body-xs-small,  12);
+
+  /* font weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* line heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+}
+

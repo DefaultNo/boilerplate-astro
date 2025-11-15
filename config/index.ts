@@ -11,6 +11,8 @@ import {
   shouldEnableDevtools,
 } from './env'
 
+
+import { createI18nConfig } from './i18n'
 import { createViteConfig } from './vite'
 import { createBuildConfig } from './build'
 import { createPathsConfig } from './paths'
@@ -57,6 +59,8 @@ export function createAstroConfig(env?: Record<string, string>): AstroUserConfig
     vite: createViteConfig(environment),
 
     env: createEnvConfig(),
+
+    i18n: createI18nConfig(),
   }
 }
 

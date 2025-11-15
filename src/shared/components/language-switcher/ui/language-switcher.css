@@ -1,0 +1,16 @@
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+}
+
+.language-switcher__select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.language-switcher__select:focus {
+  outline: 2px solid #3b82f6;
+}

@@ -6,16 +6,18 @@
     "dev": "astro dev --mode development",
     "dev:staging": "astro dev --mode staging",
     "dev:prod": "astro dev --mode production",
-    "build": "astro build --mode production",
-    "build:dev": "astro build --mode development",
-    "build:staging": "astro build --mode staging",
+    "build": "yarn i18n:generate-types && astro build --mode production",
+    "build:dev": "yarn i18n:generate-types && astro build --mode development",
+    "build:staging": "yarn i18n:generate-types && astro build --mode staging",
     "preview": "astro preview --mode production",
     "preview:dev": "astro preview --mode development",
     "preview:staging": "astro preview --mode staging",
+    "i18n:generate-types": "tsx scripts/i18n/generate-types.ts",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.10",
+    "@astrojs/node": "^9.5.0",
     "@astrojs/react": "^4.4.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
@@ -26,6 +28,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "cross-env": "^10.1.0",
-    "eslint": "^9.39.1"
+    "eslint": "^9.39.1",
+    "tsx": "^4.20.6"
   }
 }

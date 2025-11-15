@@ -1,0 +1,53 @@
+---
+import { getRelativeLocaleUrlList } from 'astro:i18n'
+import BaseLayout from '@/app/layouts/base-layout.astro'
+import { LanguageSwitcher } from '@/shared/components'
+import { getLocaleFromUrl, useTranslations } from '@/shared/lib'
+import type { Locale } from '@/config/i18n'
+
+export async function getStaticPaths() {
+  const paths = getRelativeLocaleUrlList()
+
+  return paths.map((url) => {
+    const locale = url.split('/')[1] as Locale
+
+    return {
+      params: { locale },
+    }
+  })
+}
+
+const locale = getLocaleFromUrl(Astro.url.pathname)
+const { common, pages } = await useTranslations(locale)
+---
+
+<BaseLayout
+  locale={locale}
+  title={pages.home.title}
+  description={pages.home.description}
+>
+  <header>
+    <h1>{pages.home.heading}</h1>
+    <LanguageSwitcher client:load currentLocale={locale} />
+  </header>
+
+  <main>
+    <p>{pages.home.description}</p>
+    <p>{common.mode}: {import.meta.env.MODE}</p>
+  </main>
+</BaseLayout>
+
+<style>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+</style>

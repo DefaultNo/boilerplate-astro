@@ -11,8 +11,9 @@ function createAliases(): Record<string, string> {
   const cwd = process.cwd()
 
   return {
-    '@': path.resolve(cwd, './src'),
-    '@pages': path.resolve(cwd, './src/pages'),
-    '@shared': path.resolve(cwd, './src/shared'),
+    '@/app': path.resolve(cwd, './src/app'),
+    '@/pages': path.resolve(cwd, './src/pages'),
+    '@/shared': path.resolve(cwd, './src/shared'),
+    '@/config': path.resolve(cwd, './config'),
   }
 }

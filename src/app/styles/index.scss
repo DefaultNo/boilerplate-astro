@@ -1,9 +1,9 @@
-@import './base/reset';
-@import './fonts/fonts';
-@import './mixins/mixins';
+@use './base/reset';
+@use './fonts/fonts';
+@use './mixins/mixins';
 
-@import './themes/light';
+@use './themes/light';
 
-@import './base/base';
-@import './variables/index';
+@use './base/base';
+@use './variables/index';
 

@@ -1,4 +1,4 @@
-import type { Locale } from '@/shared/config/i18n'
+import type { Locale } from '@/config/i18n'
 import type { Resources } from '@/shared/config/i18n/generated/resources.types'
 
 const translationsCache = new Map<string, any>()
